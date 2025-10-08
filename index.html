@@ -111,3 +111,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    $("#btnCari").click(function () {
+      const lokasiInput = $("#inputLokasi").val().trim();
+
+      if (lokasiInput === "") {
+        alert("Masukkan nama lokasi terlebih dahulu!");
+        return;
+      }
+
+      const urlapi = `https://api.weatherapi.com/v1/current.json?key=f66a2beb45d14b238e964000250810&q=${lokasiInput}&aqi=no`;
