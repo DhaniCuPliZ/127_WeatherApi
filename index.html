@@ -122,3 +122,31 @@
       }
 
       const urlapi = `https://api.weatherapi.com/v1/current.json?key=f66a2beb45d14b238e964000250810&q=${lokasiInput}&aqi=no`;
+      $.ajax({
+        url: urlapi,
+        method: "GET",
+        success: function (data) {
+          $("#lokasi").text(data.location.name);
+          $("#negara").text(data.location.country);
+          $("#provinsi").text(data.location.region);
+          $("#kecamatan").text(data.location.tz_id);
+          $("#longitude").text(data.location.lon);
+          $("#latitude").text(data.location.lat);
+          $("#suhu").text(data.current.temp_c + " °C");
+
+          $("#tampilan").html(`
+            <h3>Detail Cuaca:</h3>
+            <p><strong>Terakhir diperbarui:</strong> ${data.current.last_updated}</p>
+            <p><strong>Kondisi:</strong> ${data.current.condition.text}</p>
+            <img src="https:${data.current.condition.icon}" alt="icon cuaca">
+          `);
+        },
+        error: function (xhr) {
+          console.error(xhr);
+          alert("Lokasi tidak ditemukan atau API error. Coba nama kota lain!");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
